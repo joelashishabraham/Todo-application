@@ -1,16 +1,107 @@
-# React + Vite
+# To-Do Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack to-do application with user authentication, task management, and persistent sessions.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**User Authentication**
+- User registration with email validation
+- Secure login with password hashing
+- Logout functionality
 
-## React Compiler
+**Task Management**
+- Create tasks with title, description, and due date
+- View all tasks in a organized list
+- Edit existing tasks
+- Delete tasks
+- Mark tasks as complete/incomplete
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+### Frontend
+- **React** - UI framework
+- **Vite** - Build tool
+- **CSS3** - Styling
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Backend
+- **Python Flask** - Web framework
+- **SQLite** - Database
+- **Flask-CORS** - Cross-origin requests
+
+## Installation
+
+### Prerequisites
+- Node.js (v16+)
+- Python 3.8+
+
+### Backend Setup
+
+```bash
+cd backend
+python -m venv venv
+
+# On Windows
+venv\Scripts\activate
+
+# On Mac/Linux
+source venv/bin/activate
+
+pip install -r requirements.txt
+```
+
+### Frontend Setup
+
+```bash
+cd frontend
+npm install
+```
+
+## Running the Application
+
+### Start Backend (Terminal 1)
+
+```bash
+cd backend
+venv\Scripts\activate
+python main.py
+```
+
+Backend runs on: `http://localhost:5000`
+
+### Start Frontend (Terminal 2)
+
+```bash
+cd frontend
+npm run dev
+```
+
+Frontend runs on: `http://localhost:5173`
+
+## Usage
+
+1. **Open** `http://localhost:5173` in your browser
+2. **Register** - Create a new account
+3. **Login** - Sign in with your credentials
+4. **Add Task** - Click "+ Add Task" button to create a new task
+5. **Edit Task** - Click "Edit" to modify a task
+6. **Complete Task** - Check the checkbox to mark as complete
+7. **Delete Task** - Click "Delete" to remove a task
+8. **Logout** - Click "Logout" button to sign out
+
+## API Endpoints
+
+### Authentication
+- `POST /api/register` - Register new user
+- `POST /api/login` - Login user
+- `POST /api/logout` - Logout user
+- `GET /api/me` - Get current user info
+
+### Tasks
+- `GET /api/tasks` - Get all tasks for user
+- `POST /api/tasks` - Create new task
+- `PUT /api/tasks/<id>` - Update task
+- `DELETE /api/tasks/<id>` - Delete task
+
+## Author
+
+Joel
