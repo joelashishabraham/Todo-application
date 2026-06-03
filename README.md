@@ -1,6 +1,6 @@
 # To-Do Application
 
-A full-stack to-do application with user authentication, task management, and persistent sessions.
+A full-stack to-do application with user authentication, task management.
 
 ## Features
 
