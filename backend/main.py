@@ -6,7 +6,7 @@ import os
 
 app = Flask(__name__)
 app.secret_key = "todo-app-secret"
-CORS(app)
+CORS(app, supports_credentials=True, origins=['http://localhost:5173'])
 
 DB_PATH = 'tasks.db'
 
@@ -120,6 +120,31 @@ def logout():
     return jsonify({"success": True, "message": "Logged out successfully"}), 200
 
 # TASK ENDPOINTS
+
+@app.route('/api/me', methods=['GET'])
+def get_me():
+    """Get current logged-in user info"""
+    if not is_logged_in():
+        return jsonify({"success": False, "message": "Not logged in"}), 401
+    
+    try:
+        user_id = get_current_user_id()
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        c.execute('SELECT id, username, email FROM users WHERE id = ?', (user_id,))
+        user = c.fetchone()
+        conn.close()
+        
+        if user:
+            return jsonify({
+                "success": True, 
+                "user": {"id": user[0], "username": user[1], "email": user[2]}
+            }), 200
+        else:
+            return jsonify({"success": False, "message": "User not found"}), 404
+    
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
 
 @app.route('/api/tasks', methods=['GET'])
 def get_tasks():
